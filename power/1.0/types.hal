@@ -77,6 +77,15 @@ enum PowerHint : uint32_t {
     * it has been launched.
     */
     LAUNCH = 0x00000008,
+
+   /**
+    * Indicates that the devices started to stopped dreaming/dozing.
+    * The data parameter is non-zero if device just started to dream/doze
+    * and zero if it just exited from one of these modes.
+    * This may be used to lower the devices performance or shut down
+    * some unrequired hardware (like lights, buttons, etc.)
+    */
+    DREAMING_OR_DOZING = 0x00000200,
 };
 
 enum Feature : uint32_t {
