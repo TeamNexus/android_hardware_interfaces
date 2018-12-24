@@ -30,6 +30,9 @@ endif
 ifdef WIFI_HIDL_FEATURE_DISABLE_AP
 LOCAL_CPPFLAGS += -DWIFI_HIDL_FEATURE_DISABLE_AP
 endif
+ifdef QC_WIFI_HIDL_FEATURE_DUAL_AP
+LOCAL_CPPFLAGS += -DQC_WIFI_HIDL_FEATURE_DUAL_AP
+endif
 LOCAL_SRC_FILES := \
     hidl_struct_util.cpp \
     hidl_sync_util.cpp \
@@ -70,6 +73,10 @@ LOCAL_MODULE := android.hardware.wifi@1.0-service
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_CPPFLAGS := -Wall -Werror -Wextra
+ifeq ($(TARGET_ARCH),arm)
+    LOCAL_CPPFLAGS += -DARCH_ARM_32
+endif
+
 LOCAL_SRC_FILES := \
     service.cpp
 LOCAL_SHARED_LIBRARIES := \
@@ -80,6 +87,7 @@ LOCAL_SHARED_LIBRARIES := \
     liblog \
     libnl \
     libutils \
+    libhwbinder \
     libwifi-hal \
     libwifi-system-iface \
     android.hardware.wifi@1.0 \
